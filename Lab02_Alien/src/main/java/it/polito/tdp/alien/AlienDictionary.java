@@ -13,7 +13,9 @@ public class AlienDictionary {
 	}
 
 	public void addWord(String alienword, String translation) {
-		Word f = new Word(alienword,translation);
+		
+		Word f = new Word(alienword);
+		f.getTraduzionimultiple().add(translation);
 		this.mappadizionario.put(alienword, f);
 		this.dictionary.add(f);
 	}
@@ -21,7 +23,12 @@ public class AlienDictionary {
 	public String translateWord(String alienword) {
 		Word o = this.mappadizionario.get(alienword);
 		if(o == null) return null;
-		return o.getTraduzione();
+		String d = "";
+		for(String c : o.getTraduzionimultiple()) {
+			if(d=="") d+=c;
+			else d+="\n"+c;
+		}
+		return d;
 	}
 
 	public List<Word> getDictionary() {
@@ -38,6 +45,15 @@ public class AlienDictionary {
 
 	public void setMappadizionario(Map<String, Word> mappadizionario) {
 		this.mappadizionario = mappadizionario;
+	}
+	public String result(String word) {
+		String result="";
+		Word f = this.mappadizionario.get(word);
+		for(String v : f.getTraduzionimultiple()) {
+			if(result=="") result=result+v;
+			else result= result+"\n"+v;
+		}
+		return result;
 	}
 	
 	

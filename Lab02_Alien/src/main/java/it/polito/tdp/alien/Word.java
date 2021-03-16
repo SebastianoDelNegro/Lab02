@@ -1,15 +1,19 @@
 package it.polito.tdp.alien;
 
+import java.util.*;
+
 public class Word {
 	
 	private String alienword;
-	private String traduzione;
+	//private String traduzione;
+	List<String> traduzionimultiple;
 	
 	
-	public Word(String alienword, String traduzione) {
+	public Word(String alienword) {
 		super();
 		this.alienword = alienword;
-		this.traduzione = traduzione;
+		//this.traduzione = traduzione;
+		this.traduzionimultiple= new LinkedList<String>();
 	}
 
 
@@ -23,14 +27,17 @@ public class Word {
 	}
 
 
-	public String getTraduzione() {
-		return traduzione;
-	}
+	//public String getTraduzione() {
+	//	return traduzione;
+	//}
 
 
-	public void setTraduzione(String traduzione) {
-		this.traduzione = traduzione;
-	}
+	//public void setTraduzione(String traduzione) {
+	//	this.traduzione = traduzione;
+	//}
+
+
+	
 
 
 	@Override
@@ -38,7 +45,6 @@ public class Word {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((alienword == null) ? 0 : alienword.hashCode());
-		result = prime * result + ((traduzione == null) ? 0 : traduzione.hashCode());
 		return result;
 	}
 
@@ -57,13 +63,32 @@ public class Word {
 				return false;
 		} else if (!alienword.equals(other.alienword))
 			return false;
-		if (traduzione == null) {
-			if (other.traduzione != null)
-				return false;
-		} else if (!traduzione.equals(other.traduzione))
-			return false;
 		return true;
 	}
-	
 
+
+	public List<String> getTraduzionimultiple() {
+		return traduzionimultiple;
+	}
+
+
+	public void setTraduzionimultiple(List<String> traduzionimultiple) {
+		this.traduzionimultiple = traduzionimultiple;
+	}
+
+
+	
+	public String risultato() {
+		String c ="";
+		for(String x : traduzionimultiple) {
+			if(c=="") c+=x;
+			else c="\n"+x;
+		}
+		return c; 
+	}
+
+
+	
+	
+	
 }

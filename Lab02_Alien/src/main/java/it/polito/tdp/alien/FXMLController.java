@@ -31,13 +31,14 @@ public class FXMLController {
 
     @FXML
     private TextArea txtTraduzione;
+    
+   
 
     @FXML
     void doClear(ActionEvent event) {
     	
     	txtTraduzione.clear();
     	
-
 
     }
 
@@ -52,24 +53,27 @@ public class FXMLController {
     		return;
     	}
 
-    	if(testo.contains(" ")==true) {
+    	if(t.contains(" ")==true) {
     		String[] arr = t.split(" ");
     		for(Word b : dictionary.getDictionary()) {
-    			String n = b.getAlienword();
-    			if(n.toLowerCase().equals(arr[0])) {
-    				b.setTraduzione(arr[1]);
+    			String n = b.getAlienword().toLowerCase();
+    			if(n.equals(arr[0])) {
+    				b.getTraduzionimultiple().add(arr[1]);
+    				txtTesto.clear();
+    				return;
     			}
     		}
     		
     		dictionary.addWord(arr[0], arr[1]);
+    		
     	}
     	else {
+    		//Word v = dictionary.getMappadizionario().get(t);
     		String tra = dictionary.translateWord(t);
     		if(tra==null) {
     			txtTraduzione.setText("null");
     			txtTesto.clear();
-    			return;
-    		}
+    			return;}
     		
     		txtTraduzione.setText(tra);
     	}
